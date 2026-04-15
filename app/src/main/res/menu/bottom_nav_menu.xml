@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/albumsFragment"    android:icon="@drawable/ic_album"     android:title="Albumes"/>
+    <item android:id="@+id/artistsFragment"   android:icon="@drawable/ic_artist"    android:title="Artistas"/>
+    <item android:id="@+id/collectorsFragment" android:icon="@drawable/ic_collector" android:title="Coleccionistas"/>
+</menu>
