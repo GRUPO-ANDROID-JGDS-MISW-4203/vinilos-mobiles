@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Vinilos</string>
+    <string name="role_visitante">Visitante</string>
+    <string name="role_coleccionista">Coleccionista</string>
+    <string name="select_role">Seleccionar rol</string>
 </resources>
