@@ -11,4 +11,9 @@
     <color name="border">#E0E0E0</color>
     <color name="amber_light">#FAEEDA</color>
     <color name="amber_dark">#633806</color>
+    <!-- Chips de rol -->
+    <color name="chip_visitante_bg">#F1EFE8</color>
+    <color name="chip_visitante_text">#2C2C2A</color>
+    <color name="chip_coleccionista_bg">#EEEDFE</color>
+    <color name="chip_coleccionista_text">#26215C</color>
 </resources>
