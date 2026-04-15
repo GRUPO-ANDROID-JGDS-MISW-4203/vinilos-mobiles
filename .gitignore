@@ -25,3 +25,73 @@ replay_pid*
 
 # Kotlin Gradle plugin data, see https://kotlinlang.org/docs/whatsnew20.html#new-directory-for-kotlin-data-in-gradle-projects
 .kotlin/
+
+
+# ── Gradle 
+.gradle/
+build/
+**/build/
+gradle-app.setting
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+
+# ── Android Studio / IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+*.ids
+.DS_Store
+Thumbs.db
+
+# ── Configuración local (distinta en cada máquina) 
+local.properties
+
+# ── Archivos de firma — NUNCA subir al repo 
+*.jks
+*.keystore
+*.p12
+*.pfx
+
+# ── Outputs de compilación 
+app/release/
+out/
+captures/
+*.apk
+*.aab
+*.ap_
+
+# ── NDK / CMake 
+.externalNativeBuild/
+.cxx/
+
+# ── Kotlin / Java compilados 
+*.class
+*.dex
+
+# ── Logs 
+*.log
+*.tmp
+
+# ── Reportes de tests 
+app/src/test/results/
+app/src/androidTest/results/
+test-results/
+
+# ── Firebase (descomentar si usan Firebase) 
+# google-services.json
+
+# ── Lint 
+lint/intermediates/
+lint/generated/
+lint/outputs/
+lint/tmp/
+
+# ── OS 
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
