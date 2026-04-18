@@ -16,4 +16,5 @@
     <color name="chip_visitante_text">#2C2C2A</color>
     <color name="chip_coleccionista_bg">#EEEDFE</color>
     <color name="chip_coleccionista_text">#26215C</color>
+    <color name="error">#B00020</color>
 </resources>
