@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Album de Prueba 1",
+    "cover": "https://example.com/cover1.jpg",
+    "releaseDate": "2023-01-15",
+    "genre": "Rock",
+    "recordLabel": "Sony Music",
+    "description": "Este es un album de prueba",
+    "tracks": [
+      {
+        "id": 1,
+        "name": "Track 1",
+        "duration": "3:45"
+      }
+    ],
+    "performers": [
+      {
+        "id": 1,
+        "name": "Artista Prueba",
+        "image": "https://example.com/artist.jpg",
+        "description": "Artista de prueba",
+        "birthDate": "1990-01-01"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Album de Prueba 2",
+    "cover": "https://example.com/cover2.jpg",
+    "releaseDate": "2023-02-20",
+    "genre": "Pop",
+    "recordLabel": "Universal",
+    "description": "Otro album de prueba",
+    "tracks": [],
+    "performers": []
+  }
+]

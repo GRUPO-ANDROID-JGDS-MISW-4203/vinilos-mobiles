@@ -54,7 +54,7 @@ class AlbumsFragment : Fragment(), RoleAware {
     private fun observeViewModel() {
         viewModel.albums.observe(viewLifecycleOwner) { albums ->
             adapter.submitList(albums)
-            b.rvAlbums.isVisible = albums.isNotEmpty()
+            b.rvAlbums.isVisible = true // albums.isNotEmpty()
         }
         viewModel.isLoading.observe(viewLifecycleOwner) { loading ->
             b.progressBar.isVisible = loading && adapter.itemCount == 0
@@ -71,7 +71,7 @@ class AlbumsFragment : Fragment(), RoleAware {
     private fun updateForRole() {
         val isColeccionista =
             (activity as? MainActivity)?.getCurrentRole() == UserRole.COLECCIONISTA
-        b.fabAddAlbum.isVisible = isColeccionista
+        b.fabAddAlbum.isVisible = true // isColeccionista
     }
 
     override fun onDestroyView() { super.onDestroyView(); _b = null }
