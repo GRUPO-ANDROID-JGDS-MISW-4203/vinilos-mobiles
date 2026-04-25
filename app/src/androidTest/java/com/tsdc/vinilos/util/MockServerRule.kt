@@ -42,10 +42,13 @@ class MockServerRule : TestWatcher() {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build().create(VinylsApiService::class.java)
+
+        NetworkModule.setBaseUrlForTesting(_baseUrl)
     }
 
     override fun finished(description: Description) {
         super.finished(description)
+        NetworkModule.resetBaseUrl()
         server.shutdown()
     }
 
@@ -62,5 +65,19 @@ class MockServerRule : TestWatcher() {
         val inputStream = context.assets.open(fileName)
         val jsonResponse = inputStream.bufferedReader().use { it.readText() }
         enqueue(jsonResponse, statusCode)
+    }
+
+    fun enqueueDelayed(
+        jsonResponse: String,
+        delayMs: Long,
+        statusCode: Int = 200
+    ) {
+        server.enqueue(
+            MockResponse()
+                .setResponseCode(statusCode)
+                .setBody(jsonResponse)
+                .setBodyDelay(delayMs, TimeUnit.MILLISECONDS)
+                .addHeader("Content-Type", "application/json")
+        )
     }
 }

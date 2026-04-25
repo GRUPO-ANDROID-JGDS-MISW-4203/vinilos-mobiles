@@ -42,6 +42,9 @@ class AlbumDetailFragment : Fragment(), RoleAware {
         b.btnAddTrack.setOnClickListener {
             // HU08 - Sprint 3
         }
+        b.btnRetry.setOnClickListener {
+            viewModel.fetchAlbum(args.albumId)
+        }
 
         observeViewModel()
         updateForRole()

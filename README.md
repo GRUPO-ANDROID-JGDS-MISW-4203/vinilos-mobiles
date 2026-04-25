@@ -15,7 +15,7 @@ Aplicación móvil nativa Android para la plataforma **Vinilos**, desarrollada e
 
 ## Backend de referencia
 - Repositorio: `https://github.com/TheSoftwareDesignLab/BackVynils`
-- URL base: `PENDIENTE_DEFINIR_URL_DESPLIEGUE`
+- URL base: `https://backvynils-q6yc.onrender.com/`
 
 ## Stack tecnológico
 - Kotlin
@@ -44,21 +44,39 @@ El MVP del proyecto incluye las historias HU01–HU08:
 - HU08 Asociar tracks con un álbum
 
 ## Estado actual
-Actualmente el proyecto se encuentra en la iteración **Inception**, donde se está definiendo:
-- backlog del producto
-- arquitectura inicial
-- reglas de trabajo
-- milestones y tablero
-- prototipo UX/UI navegable
+Implementación en progreso de HU del MVP con foco activo en Sprint 1 (HU01 y HU02).
+
+## Versiones técnicas
+- Android Gradle Plugin: `8.2.2`
+- Kotlin plugin: `1.9.22`
+- Gradle Wrapper: `8.9` (definido en `gradle/wrapper/gradle-wrapper.properties`)
+- Java source/target: `1.8`
+- SDK Android: `compileSdk 34`, `targetSdk 34`, `minSdk 21`
 
 ## Cómo ejecutar el proyecto localmente
-> Pendiente de completar cuando se suba el esqueleto Android al repositorio.
+1. Clonar el repositorio.
+2. Abrir el proyecto en Android Studio.
+3. Verificar JDK 21 instalado para tooling de Android Studio.
+4. Sincronizar Gradle.
+5. Ejecutar la app en un emulador o dispositivo físico Android 5.0+.
 
-1. Clonar el repositorio
-2. Abrir el proyecto en Android Studio
-3. Sincronizar Gradle
-4. Configurar la URL base del backend
-5. Ejecutar la app en un emulador o dispositivo físico
+## Comandos de build y calidad
+
+```bash
+gradle assembleDebug
+gradle test
+gradle connectedAndroidTest
+gradle lint
+```
+
+## Estado de validación local (Sprint 1 - HU02)
+
+Fecha de última validación: `2026-04-25`
+
+- `gradle assembleDebug`: PASS
+- `gradle test`: PASS
+- `gradle lint`: PASS
+- `gradle connectedAndroidTest`: PASS
 
 ## Documentación
 La documentación del proyecto se encuentra en la wiki del repositorio.

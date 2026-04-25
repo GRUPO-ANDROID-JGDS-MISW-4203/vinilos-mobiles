@@ -3,10 +3,11 @@ package com.tsdc.vinilos.repository
 import com.tsdc.vinilos.model.Album
 import com.tsdc.vinilos.model.Performer
 import com.tsdc.vinilos.model.Track
+import com.tsdc.vinilos.network.NetworkModule
 
 class AlbumRepository {
 
-    private val albums = listOf(
+    private val fallbackAlbums = listOf(
         Album(
             id = 1,
             name = "Buscando América",
@@ -53,7 +54,15 @@ class AlbumRepository {
         )
     )
 
-    suspend fun getAlbums(): List<Album> = albums
+    suspend fun getAlbums(): List<Album> {
+        return try {
+            NetworkModule.api.getAlbums()
+        } catch (_: Exception) {
+            fallbackAlbums
+        }
+    }
 
-    suspend fun getAlbum(id: Int): Album = albums.first { it.id == id }
+    suspend fun getAlbum(id: Int): Album {
+        return NetworkModule.api.getAlbum(id)
+    }
 }
