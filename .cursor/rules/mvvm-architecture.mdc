@@ -1,0 +1,130 @@
+---
+description: Reglas de arquitectura MVVM para el proyecto Vinilos. Aplica siempre al trabajar con ViewModels, Repositories y capas de datos
+alwaysApply: true
+---
+
+# Arquitectura MVVM - Reglas
+
+## Separación de Responsabilidades
+
+### View (Activity/Fragment)
+- Solo lógica de UI y navegación
+- Observa LiveData del ViewModel
+- NO accede directamente a Repository
+
+```kotlin
+// ✅ CORRECTO
+class AlbumsFragment : Fragment() {
+    private val viewModel: AlbumsViewModel by viewModels()
+    
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.albums.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UIState.Loading -> showLoading()
+                is UIState.Success -> showAlbums(state.data)
+                is UIState.Error -> showError(state.message)
+            }
+        }
+        viewModel.loadAlbums()
+    }
+}
+```
+
+### ViewModel
+- Expone LiveData inmutable
+- Transforma datos para la UI
+- NO tiene referencias a Views
+
+```kotlin
+// ✅ CORRECTO
+class AlbumsViewModel(private val repository: AlbumsRepository) : ViewModel() {
+    
+    private val _albums = MutableLiveData<UIState<List<Album>>>()
+    val albums: LiveData<UIState<List<Album>>> = _albums
+    
+    fun loadAlbums() {
+        viewModelScope.launch {
+            _albums.value = UIState.Loading
+            try {
+                _albums.value = UIState.Success(repository.getAlbums())
+            } catch (e: Exception) {
+                _albums.value = UIState.Error(e.message ?: "Error")
+            }
+        }
+    }
+}
+
+// ❌ INCORRECTO - ViewModel con referencia a View
+class AlbumsViewModel(private val fragment: AlbumsFragment) : ViewModel()
+```
+
+### Repository
+- Orquesta fuentes de datos (local/remoto)
+- Implementa estrategias de caché
+- Retorna modelos de dominio
+
+```kotlin
+// ✅ CORRECTO
+class AlbumsRepository(
+    private val serviceAdapter: AlbumServiceAdapter,
+    private val albumDao: AlbumDao
+) {
+    suspend fun getAlbums(): List<Album> {
+        return try {
+            val remoteAlbums = serviceAdapter.getAlbums()
+            albumDao.insertAll(remoteAlbums.map { it.toEntity() })
+            remoteAlbums
+        } catch (e: Exception) {
+            albumDao.getAll().map { it.toModel() }
+        }
+    }
+}
+```
+
+### Service Adapter
+- Encapsula llamadas Retrofit
+- Convierte DTOs a modelos
+- Maneja errores de red
+
+```kotlin
+// ✅ CORRECTO
+class AlbumServiceAdapter(private val api: VinilosApi) {
+    suspend fun getAlbums(): List<Album> {
+        return api.getAlbums().map { it.toModel() }
+    }
+    
+    suspend fun createAlbum(album: Album): Album {
+        return api.createAlbum(album.toDto()).toModel()
+    }
+}
+```
+
+### DAO (Room)
+- Solo operaciones CRUD
+- Usa anotaciones @Insert, @Query, etc.
+
+```kotlin
+@Dao
+interface AlbumDao {
+    @Query("SELECT * FROM albums")
+    suspend fun getAll(): List<AlbumEntity>
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(albums: List<AlbumEntity>)
+}
+```
+
+## Flujo de Datos
+
+```
+User Action → View → ViewModel → Repository → ServiceAdapter/DAO
+                 ↑                    ↓
+                 └──── LiveData ←────┘
+```
+
+## Anti-Patrones a Evitar
+
+1. ❌ ViewModel accediendo a Context de Activity
+2. ❌ Repository con lógica de UI
+3. ❌ View llamando directamente a ServiceAdapter
+4. ❌ DAO con lógica de negocio
