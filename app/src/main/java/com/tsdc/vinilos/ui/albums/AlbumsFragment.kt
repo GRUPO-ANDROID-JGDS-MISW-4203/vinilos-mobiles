@@ -1,7 +1,9 @@
 package com.tsdc.vinilos.ui.albums
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,11 +20,15 @@ class AlbumsFragment : Fragment(), RoleAware {
 
     private var _b: FragmentAlbumsBinding? = null
     private val b get() = _b!!
+
     private val viewModel: AlbumViewModel by viewModels()
     private lateinit var adapter: AlbumAdapter
 
-    override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?) =
-        FragmentAlbumsBinding.inflate(i, c, false).also { _b = it }.root
+    override fun onCreateView(
+        i: LayoutInflater,
+        c: ViewGroup?,
+        s: Bundle?
+    ) = FragmentAlbumsBinding.inflate(i, c, false).also { _b = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,14 +36,14 @@ class AlbumsFragment : Fragment(), RoleAware {
         setupFab()
         observeViewModel()
         updateForRole()
+        viewModel.refresh()
     }
 
     private fun setupRecyclerView() {
         adapter = AlbumAdapter { album ->
-            // Navegar al detalle — HU02
-            // findNavController().navigate(
-            //     AlbumsFragmentDirections.actionAlbumsToDetail(album.id)
-            // )
+            findNavController().navigate(
+                AlbumsFragmentDirections.actionAlbumsToDetail(album.id)
+            )
         }
         b.rvAlbums.layoutManager = LinearLayoutManager(requireContext())
         b.rvAlbums.adapter = adapter
@@ -45,8 +51,7 @@ class AlbumsFragment : Fragment(), RoleAware {
 
     private fun setupFab() {
         b.fabAddAlbum.setOnClickListener {
-            // Navegar a crear álbum — HU07
-            // findNavController().navigate(R.id.action_albums_to_createAlbum)
+            findNavController().navigate(R.id.action_albums_to_createAlbum)
         }
         b.btnRetry.setOnClickListener { viewModel.refresh() }
     }
@@ -54,15 +59,15 @@ class AlbumsFragment : Fragment(), RoleAware {
     private fun observeViewModel() {
         viewModel.albums.observe(viewLifecycleOwner) { albums ->
             adapter.submitList(albums)
-            b.rvAlbums.isVisible = true // albums.isNotEmpty()
+            b.rvAlbums.isVisible = albums.isNotEmpty()
         }
         viewModel.isLoading.observe(viewLifecycleOwner) { loading ->
             b.progressBar.isVisible = loading && adapter.itemCount == 0
         }
         viewModel.error.observe(viewLifecycleOwner) { error ->
-            b.tvError.isVisible   = error != null
-            b.tvError.text        = error
-            b.btnRetry.isVisible  = error != null
+            b.tvError.isVisible = error != null
+            b.tvError.text = error
+            b.btnRetry.isVisible = error != null
         }
     }
 
@@ -71,8 +76,11 @@ class AlbumsFragment : Fragment(), RoleAware {
     private fun updateForRole() {
         val isColeccionista =
             (activity as? MainActivity)?.getCurrentRole() == UserRole.COLECCIONISTA
-        b.fabAddAlbum.isVisible = true // isColeccionista
+        b.fabAddAlbum.isVisible = isColeccionista
     }
 
-    override fun onDestroyView() { super.onDestroyView(); _b = null }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _b = null
+    }
 }
