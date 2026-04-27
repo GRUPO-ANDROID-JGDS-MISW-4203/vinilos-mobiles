@@ -1,0 +1,140 @@
+---
+description: Reglas de GitFlow para el proyecto Vinilos. Aplica siempre al trabajar con Git
+alwaysApply: true
+---
+
+# GitFlow - Flujo de Trabajo
+
+## Estructura de Ramas
+
+```
+main (producción)
+  │
+  └── develop (integración)
+        │
+        ├── feature/HU01-catalogo-albumes
+        ├── feature/HU02-detalle-album
+        ├── feature/HU07-crear-album
+        └── ...
+```
+
+## Convenciones de Nombrado
+
+### Ramas
+```bash
+# Formato: feature/HUxx-descripcion-corta
+feature/HU01-catalogo-albumes
+feature/HU02-detalle-album
+feature/HU07-crear-album
+feature/HU08-asociar-tracks
+
+# Para bugfixes
+bugfix/HU01-corregir-scroll
+bugfix/fix-crash-detalle
+
+# Para releases
+release/sprint-1
+release/sprint-2
+```
+
+### Commits
+```bash
+# Formato: tipo(alcance): descripción
+
+# Tipos
+feat:     Nueva funcionalidad
+fix:      Corrección de bug
+docs:     Documentación
+style:    Formato (no afecta lógica)
+refactor: Refactorización
+test:     Pruebas
+chore:    Tareas de mantenimiento
+
+# Ejemplos
+feat(albums): implementar lista de álbumes HU01
+fix(albums): corregir crash al cargar imágenes
+test(albums): agregar pruebas E2E para HU01
+docs(readme): actualizar instrucciones de instalación
+```
+
+## Flujo de Trabajo
+
+### 1. Iniciar Feature
+```bash
+git checkout develop
+git pull origin develop
+git checkout -b feature/HU01-catalogo-albumes
+```
+
+### 2. Desarrollo
+```bash
+# Commits frecuentes y atómicos
+git add .
+git commit -m "feat(albums): crear estructura MVVM para álbumes"
+git commit -m "feat(albums): implementar AlbumsRepository"
+git commit -m "test(albums): agregar pruebas E2E"
+```
+
+### 3. Crear Pull Request
+```bash
+git push origin feature/HU01-catalogo-albumes
+# Crear PR en GitHub: feature/HU01 → develop
+```
+
+### 4. Code Review
+- Mínimo 1 aprobación requerida
+- Ejecutar pruebas localmente
+- Verificar que Lint pasa
+- Revisar arquitectura MVVM
+
+### 5. Merge (Squash and Merge)
+```bash
+# En GitHub, usar "Squash and merge"
+# El mensaje del merge debe resumir todos los cambios
+```
+
+### 6. Release
+```bash
+# Al final del sprint
+git checkout develop
+git pull origin develop
+git checkout -b release/sprint-1
+# Verificar todo funciona
+git checkout main
+git merge release/sprint-1
+git tag -a v1.0.0 -m "Sprint 1 release"
+git push origin main --tags
+```
+
+## Reglas Importantes
+
+1. **NUNCA** hacer push directo a `main` o `develop`
+2. **SIEMPRE** crear PR para integrar código
+3. **SIEMPRE** usar "Squash and merge" para PRs
+4. **SIEMPRE** tener al menos 1 revisión antes de merge
+5. PRs deben referenciar el Issue/HU correspondiente
+
+## Template de PR
+
+```markdown
+## Descripción
+Implementación de HU01 - Consultar catálogo de álbumes
+
+## Cambios
+- [ ] AlbumsFragment con RecyclerView
+- [ ] AlbumsViewModel con LiveData
+- [ ] AlbumsRepository con caché
+- [ ] Pruebas E2E en Espresso
+
+## Pruebas
+- [ ] Pruebas unitarias pasan
+- [ ] Pruebas E2E pasan
+- [ ] Probado en Android 5.0+
+- [ ] Sin warnings de Lint
+
+## Screenshots
+[Adjuntar capturas de pantalla]
+
+## Relacionado
+Closes #XX
+```

@@ -1,0 +1,79 @@
+---
+description: Contexto general del proyecto Vinilos para TSDC. Aplica siempre para entender el contexto del proyecto
+alwaysApply: true
+---
+
+# Contexto del Proyecto Vinilos
+
+## Información General
+
+- **Proyecto**: Vinilos Mobile App
+- **Cliente**: The Software Design Company (TSDC)
+- **Curso**: Ingeniería de Software para Apps Móviles - MISO UniAndes
+- **Equipo**: 4 desarrolladores
+- **Duración**: 8 semanas
+
+## Stack Tecnológico
+
+| Componente | Tecnología |
+|------------|------------|
+| Lenguaje | Kotlin |
+| IDE | Android Studio |
+| Arquitectura | MVVM |
+| UI | Material Design 3 |
+| Navegación | Navigation Component |
+| HTTP Client | Retrofit |
+| BD Local | Room |
+| Async | Coroutines |
+| Pruebas E2E | Espresso |
+| Control de versiones | Git + GitFlow |
+
+## Backend
+
+- **Repositorio**: github.com/TheSoftwareDesignLab/BackVynils
+- **Base URL**: `https://backvynils-q6yc.onrender.com`
+
+## Historias de Usuario MVP
+
+| ID | Descripción | Rol |
+|----|-------------|-----|
+| HU01 | Consultar catálogo de álbumes | Visitante |
+| HU02 | Consultar detalle de álbum | Visitante |
+| HU03 | Consultar listado de artistas | Visitante |
+| HU04 | Consultar detalle de artista | Visitante |
+| HU05 | Consultar listado de coleccionistas | Visitante |
+| HU06 | Consultar detalle de coleccionista | Visitante |
+| HU07 | Crear un álbum | Coleccionista |
+| HU08 | Asociar tracks con un álbum | Coleccionista |
+
+## Estructura del Proyecto
+
+```
+com.tsdc.vinilos/
+├── data/
+│   ├── local/        # Room DB, DAOs, Entities
+│   ├── remote/       # Retrofit API, DTOs, Adapters
+│   └── repository/   # Repositories
+├── domain/
+│   └── model/        # Domain models
+├── ui/
+│   ├── albums/       # Albums UI
+│   ├── artists/      # Artists UI
+│   └── collectors/   # Collectors UI
+└── util/             # Extensions, helpers
+```
+
+## Comandos Frecuentes
+
+```bash
+./gradlew assembleDebug      # Build APK debug
+./gradlew test               # Unit tests
+./gradlew connectedAndroidTest  # E2E tests
+./gradlew lint               # Análisis estático
+```
+
+## Referencias Clave
+
+- Ver `AGENTS.md` para guía completa
+- Ver `.cursor/skills/` para skills específicos
+- Wiki del repo para documentación del sprint
