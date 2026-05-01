@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/albumsFragment">
+    <fragment android:id="@+id/albumsFragment" android:name="com.tsdc.vinilos.ui.albums.AlbumsFragment" android:label="Albumes" tools:layout="@layout/fragment_albums">
+        <action android:id="@+id/action_albums_to_detail" app:destination="@id/albumDetailFragment"/>
+        <action android:id="@+id/action_albums_to_createAlbum" app:destination="@id/createAlbumFragment"/>
+    </fragment>
+    <fragment android:id="@+id/albumDetailFragment" android:name="com.tsdc.vinilos.ui.albums.AlbumDetailFragment" android:label="Detalle album" tools:layout="@layout/fragment_album_detail">
+        <argument android:name="albumId" app:argType="integer" android:defaultValue="0"/>
+        <action android:id="@+id/action_detail_to_addTrack" app:destination="@id/addTrackFragment"/>
+    </fragment>
+    <fragment android:id="@+id/artistsFragment" android:name="com.tsdc.vinilos.ui.artists.ArtistsFragment" android:label="Artistas" tools:layout="@layout/fragment_artists">
+        <action android:id="@+id/action_artists_to_detail" app:destination="@id/artistDetailFragment"/>
+    </fragment>
+    <fragment android:id="@+id/artistDetailFragment" android:name="com.tsdc.vinilos.ui.artists.ArtistDetailFragment" android:label="Detalle artista" tools:layout="@layout/fragment_artist_detail">
+        <argument android:name="artistId" app:argType="integer" android:defaultValue="0"/>
+    </fragment>
+    <fragment android:id="@+id/collectorsFragment" android:name="com.tsdc.vinilos.ui.collectors.CollectorsFragment" android:label="Coleccionistas" tools:layout="@layout/fragment_collectors">
+        <action android:id="@+id/action_collectors_to_detail" app:destination="@id/collectorDetailFragment"/>
+    </fragment>
+    <fragment android:id="@+id/collectorDetailFragment" android:name="com.tsdc.vinilos.ui.collectors.CollectorDetailFragment" android:label="Detalle coleccionista" tools:layout="@layout/fragment_collector_detail">
+        <argument android:name="collectorId" app:argType="integer" android:defaultValue="0"/>
+    </fragment>
+    <fragment android:id="@+id/createAlbumFragment" android:name="com.tsdc.vinilos.ui.albums.CreateAlbumFragment" android:label="Crear album" tools:layout="@layout/fragment_create_album"/>
+    <fragment android:id="@+id/addTrackFragment" android:name="com.tsdc.vinilos.ui.albums.AddTrackFragment" android:label="Agregar track" tools:layout="@layout/fragment_add_track">
+        <argument android:name="albumId" app:argType="integer" android:defaultValue="0"/>
+    </fragment>
+</navigation>

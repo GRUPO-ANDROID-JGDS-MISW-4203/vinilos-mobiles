@@ -1,0 +1,13 @@
+[
+  {
+    "id": 999,
+    "name": "Album Error",
+    "cover": "https://example.com/error.jpg",
+    "releaseDate": "2023-01-15",
+    "genre": "Rock",
+    "recordLabel": "Sony Music",
+    "description": "Album para probar errores",
+    "tracks": [],
+    "performers": []
+  }
+]

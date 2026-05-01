@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="2dp"
+    app:strokeColor="@color/border"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="104dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="14dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgArtist"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:contentDescription="@string/artist_image_content_description"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayVinilosCircle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtArtistName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/imgArtistChevron"
+            app:layout_constraintStart_toEndOf="@id/imgArtist"
+            app:layout_constraintTop_toTopOf="@id/imgArtist" />
+
+        <TextView
+            android:id="@+id/txtArtistSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/imgArtistChevron"
+            app:layout_constraintStart_toEndOf="@id/imgArtist"
+            app:layout_constraintTop_toBottomOf="@id/txtArtistName" />
+
+        <ImageView
+            android:id="@+id/imgArtistChevron"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@android:drawable/ic_media_next"
+            app:layout_constraintBottom_toBottomOf="@id/imgArtist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imgArtist"
+            app:tint="@color/text_secondary"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
