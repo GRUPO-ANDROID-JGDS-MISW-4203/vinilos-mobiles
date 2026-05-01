@@ -2,7 +2,6 @@ package com.tsdc.vinilos.ui.artists
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tsdc.vinilos.R
@@ -19,10 +18,7 @@ class ArtistAdapter(
     inner class VH(private val b: ItemArtistBinding) : RecyclerView.ViewHolder(b.root) {
         fun bind(artist: Artist) {
             b.txtArtistName.text = artist.name
-            b.txtArtistDescription.text = artist.description
-            b.txtArtistDescription.isVisible = artist.description.isNotBlank()
-            b.txtArtistDate.text = buildDateText(artist)
-            b.txtArtistDate.isVisible = artist.date.isNotBlank()
+            b.txtArtistSubtitle.text = buildSubtitle(artist)
 
             Glide.with(b.imgArtist.context)
                 .load(artist.image.ifEmpty { null })
@@ -34,12 +30,21 @@ class ArtistAdapter(
             b.root.setOnClickListener { onClick(artist) }
         }
 
-        private fun buildDateText(artist: Artist): String {
+        private fun buildSubtitle(artist: Artist): String {
+            if (artist.description.isNotBlank()) {
+                return artist.description
+            }
             val context = b.root.context
             return when (artist.dateType) {
                 ArtistDateType.BIRTH -> context.getString(R.string.artist_birth_date, artist.date)
                 ArtistDateType.CREATION -> context.getString(R.string.artist_creation_date, artist.date)
-                ArtistDateType.UNKNOWN -> context.getString(R.string.artist_generic_date, artist.date)
+                ArtistDateType.UNKNOWN -> {
+                    if (artist.date.isNotBlank()) {
+                        context.getString(R.string.artist_generic_date, artist.date)
+                    } else {
+                        context.getString(R.string.artist_no_summary)
+                    }
+                }
             }
         }
     }

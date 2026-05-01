@@ -53,6 +53,7 @@ class ArtistsFragment : Fragment() {
             adapter.submitList(artists)
             renderEmptyState()
             b.rvArtists.isVisible = artists.isNotEmpty()
+            b.tvArtistsFooter.isVisible = artists.isNotEmpty()
         }
         viewModel.isLoading.observe(viewLifecycleOwner) { loading ->
             b.progressBarArtists.isVisible = loading && adapter.itemCount == 0
@@ -63,6 +64,9 @@ class ArtistsFragment : Fragment() {
             b.tvArtistsError.isVisible = hasError
             b.tvArtistsError.text = error
             b.btnRetryArtists.isVisible = hasError
+            if (hasError) {
+                b.tvArtistsFooter.isVisible = false
+            }
             renderEmptyState()
         }
     }
