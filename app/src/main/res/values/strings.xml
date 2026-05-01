@@ -4,4 +4,10 @@
     <string name="role_visitante">Visitante</string>
     <string name="role_coleccionista">Coleccionista</string>
     <string name="select_role">Seleccionar rol</string>
+    <string name="retry">Reintentar</string>
+    <string name="artists_empty">No hay artistas disponibles.</string>
+    <string name="artist_image_content_description">Imagen del artista</string>
+    <string name="artist_birth_date">Nacimiento: %1$s</string>
+    <string name="artist_creation_date">Creacion: %1$s</string>
+    <string name="artist_generic_date">Fecha: %1$s</string>
 </resources>
