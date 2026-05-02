@@ -17,6 +17,7 @@
     </fragment>
     <fragment android:id="@+id/artistDetailFragment" android:name="com.tsdc.vinilos.ui.artists.ArtistDetailFragment" android:label="Detalle artista" tools:layout="@layout/fragment_artist_detail">
         <argument android:name="artistId" app:argType="integer" android:defaultValue="0"/>
+        <action android:id="@+id/action_artistDetail_to_albumDetail" app:destination="@id/albumDetailFragment"/>
     </fragment>
     <fragment android:id="@+id/collectorsFragment" android:name="com.tsdc.vinilos.ui.collectors.CollectorsFragment" android:label="Coleccionistas" tools:layout="@layout/fragment_collectors">
         <action android:id="@+id/action_collectors_to_detail" app:destination="@id/collectorDetailFragment"/>
