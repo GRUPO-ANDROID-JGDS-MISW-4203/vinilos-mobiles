@@ -2,6 +2,7 @@ package com.tsdc.vinilos.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.tsdc.vinilos.model.Album
+import com.tsdc.vinilos.model.Collector
 import com.tsdc.vinilos.network.VinylsApiService
 import com.tsdc.vinilos.network.dto.ArtistDto
 import com.tsdc.vinilos.repository.ArtistRepository
@@ -94,6 +95,18 @@ class ArtistViewModelTest {
         override suspend fun getArtists(): List<ArtistDto> {
             error?.let { throw it }
             return artists
+        }
+
+        override suspend fun getArtist(id: Int): ArtistDto {
+            TODO("Not yet implemented")
+        }
+
+        override suspend fun getCollectors(): List<Collector> {
+            TODO("Not yet implemented")
+        }
+
+        override suspend fun getCollector(id: Int): Collector {
+            TODO("Not yet implemented")
         }
     }
 }

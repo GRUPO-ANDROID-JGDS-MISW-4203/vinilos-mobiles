@@ -2,6 +2,7 @@ package com.tsdc.vinilos.repository
 
 import com.tsdc.vinilos.model.Album
 import com.tsdc.vinilos.model.ArtistDateType
+import com.tsdc.vinilos.model.Collector
 import com.tsdc.vinilos.network.VinylsApiService
 import com.tsdc.vinilos.network.dto.ArtistDto
 import kotlinx.coroutines.test.runTest
@@ -45,5 +46,16 @@ class ArtistRepositoryTest {
         }
 
         override suspend fun getArtists(): List<ArtistDto> = artists
+        override suspend fun getArtist(id: Int): ArtistDto {
+            TODO("Not yet implemented")
+        }
+
+        override suspend fun getCollectors(): List<Collector> {
+            TODO("Not yet implemented")
+        }
+
+        override suspend fun getCollector(id: Int): Collector {
+            TODO("Not yet implemented")
+        }
     }
 }

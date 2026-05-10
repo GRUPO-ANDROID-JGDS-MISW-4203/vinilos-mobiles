@@ -70,7 +70,7 @@ sonar {
     properties {
         property "sonar.projectKey", "vinilos-mobiles"
         property "sonar.host.url", "http://localhost:9000"
-        property "sonar.token", "sqp_99dd1629090861d9a7a088084c92c2f14b930e42"
+        property "sonar.login", "sqp_a3e521fbc3ab98ae26441b1f14c4842747d7c44e"
         property "sonar.projectName", "vinilos-mobiles"
         property "sonar.language", "kotlin"
         property "sonar.sources", "src/main/java"
