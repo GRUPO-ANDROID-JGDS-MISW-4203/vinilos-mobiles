@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
+    id "org.sonarqube"
 }
 
 android {
@@ -63,4 +64,17 @@ dependencies {
     // Lifecycle (ViewModel + LiveData)
         implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
         implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "vinilos-mobiles"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.token", "sqp_99dd1629090861d9a7a088084c92c2f14b930e42"
+        property "sonar.projectName", "vinilos-mobiles"
+        property "sonar.language", "kotlin"
+        property "sonar.sources", "src/main/java"
+        property "sonar.binaries", "build/tmp/kotlin-classes/debug"
+        property "sonar.sourceEncoding", "UTF-8"
+    }
 }
