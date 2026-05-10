@@ -6,8 +6,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.tsdc.vinilos.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +21,22 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         val navHost = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        binding.bottomNav.setupWithNavController(navHost.navController)
+        val navController = navHost.navController
+
+        binding.bottomNav.setOnItemSelectedListener { item ->
+            val currentDest = navController.currentDestination?.id
+            val targetDest = item.itemId
+
+            if (currentDest != targetDest) {
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.nav_graph, inclusive = false)
+                    .build()
+                navController.navigate(item.itemId, null, navOptions)
+            } else {
+                navController.popBackStack(item.itemId, inclusive = false)
+            }
+            true
+        }
         updateRoleChip()
     }
 

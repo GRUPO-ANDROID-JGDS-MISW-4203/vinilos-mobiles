@@ -1,6 +1,8 @@
 package com.tsdc.vinilos.network
 
 import com.tsdc.vinilos.model.Album
+import com.tsdc.vinilos.model.Collector
+import com.tsdc.vinilos.network.dto.ArtistDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -11,4 +13,16 @@ interface VinylsApiService {
 
     @GET("albums/{id}")
     suspend fun getAlbum(@Path("id") id: Int): Album
+
+    @GET("musicians")
+    suspend fun getArtists(): List<ArtistDto>
+
+    @GET("musicians/{id}")
+    suspend fun getArtist(@Path("id") id: Int): ArtistDto
+
+    @GET("collectors")
+    suspend fun getCollectors(): List<Collector>
+
+    @GET("collectors/{id}")
+    suspend fun getCollector(@Path("id") id: Int): Collector
 }

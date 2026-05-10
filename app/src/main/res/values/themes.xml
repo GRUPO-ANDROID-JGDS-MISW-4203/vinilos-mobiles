@@ -7,4 +7,9 @@
         <item name="android:statusBarColor">@color/navy</item>
         <item name="android:navigationBarColor">@color/white</item>
     </style>
+
+    <style name="ShapeAppearanceOverlayVinilosCircle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

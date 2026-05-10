@@ -4,4 +4,22 @@
     <string name="role_visitante">Visitante</string>
     <string name="role_coleccionista">Coleccionista</string>
     <string name="select_role">Seleccionar rol</string>
+    <string name="retry">Reintentar</string>
+    <string name="nav_artists">Artistas</string>
+    <string name="artists_empty">No hay artistas disponibles.</string>
+    <string name="artists_explore_catalog">Explorar catalogo</string>
+    <string name="artists_search_hint">Buscar por nombre u origen...</string>
+    <string name="artists_collection_footer">Explorando artistas de tu coleccion</string>
+    <string name="artist_image_content_description">Imagen del artista</string>
+    <string name="artist_birth_date">Nacimiento: %1$s</string>
+    <string name="artist_creation_date">Creacion: %1$s</string>
+    <string name="artist_generic_date">Fecha: %1$s</string>
+    <string name="artist_no_summary">Informacion disponible en el detalle</string>
+    <string name="artist_detail_title">Detalle del artista</string>
+    <string name="artist_bio_title">Biografia</string>
+    <string name="artist_albums_title">Albumes</string>
+    <string name="artist_no_albums">No se encontraron albumes para este artista</string>
+    <string name="artist_loading">Cargando informacion del artista...</string>
+    <string name="artist_error">Error cargando informacion del artista</string>
+    <string name="artist_detail_image">Imagen de perfil del artista</string>
 </resources>
