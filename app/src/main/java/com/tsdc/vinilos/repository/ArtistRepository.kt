@@ -10,28 +10,39 @@ class ArtistRepository(
     private val apiProvider: () -> VinylsApiService = { NetworkModule.api }
 ) {
 
+    // Cache de lista completa de artistas
+    private var cachedArtists: List<Artist>? = null
+
+    // Cache por id para evitar re-descargar el mismo detalle
+    private val artistCache = mutableMapOf<Int, Artist>()
+
+    // Cache de albums — evita descargar todo el catalogo en cada visita al detalle
+    private var cachedAlbums: List<Album>? = null
+
     suspend fun getArtists(): List<Artist> {
-        return apiProvider().getArtists().map { it.toArtist() }
+        return cachedArtists ?: apiProvider().getArtists()
+            .map { it.toArtist() }
+            .also { cachedArtists = it }
     }
 
     suspend fun getArtist(id: Int): Artist {
-        return apiProvider().getArtist(id).toArtist()
+        return artistCache[id] ?: apiProvider().getArtist(id)
+            .toArtist()
+            .also { artistCache[id] = it }
     }
 
     suspend fun getAlbumsByArtist(artistName: String): List<Album> {
-        val allAlbums = apiProvider().getAlbums()
+        // Reutiliza el cache de albums si ya fue descargado — no hace nueva peticion de red
+        val albums = cachedAlbums ?: apiProvider().getAlbums().also { cachedAlbums = it }
         val normalizedName = artistName.trim().lowercase()
-
-        allAlbums.forEach { album ->
-            val performerNames = album.performers.joinToString(", ") { it.name }
-            android.util.Log.d("ArtistRepository", "Album '${album.name}' -> performers: [$performerNames]")
-        }
-        android.util.Log.d("ArtistRepository", "Filtrando por: '$normalizedName'")
-
-        return allAlbums.filter { album ->
+        return albums.filter { album ->
             album.performers.any { it.name.trim().lowercase() == normalizedName }
-        }.also { result ->
-            android.util.Log.d("ArtistRepository", "Albumes encontrados: ${result.size}")
         }
+    }
+
+    fun clearCache() {
+        cachedArtists = null
+        artistCache.clear()
+        cachedAlbums = null
     }
 }
