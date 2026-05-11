@@ -10,9 +10,9 @@ import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class CollectorViewModel : ViewModel() {
-
-    private val repository = CollectorRepository()
+class CollectorViewModel(
+    private val repository: CollectorRepository = CollectorRepository()
+) : ViewModel() {
 
     private val _collectors = MutableLiveData<List<Collector>>()
     val collectors: LiveData<List<Collector>> get() = _collectors
