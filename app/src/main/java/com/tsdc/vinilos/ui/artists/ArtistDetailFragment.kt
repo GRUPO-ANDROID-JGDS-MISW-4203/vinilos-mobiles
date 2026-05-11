@@ -64,7 +64,6 @@ class ArtistDetailFragment : Fragment() {
                 .centerCrop()
                 .into(b.imgArtist)
 
-            android.util.Log.d("ArtistDetailFragment", "Fetching albums for artist: '${artist.name}' (id=${artist.id})")
             viewModel.fetchArtistAlbums(artist.name)
         }
 
