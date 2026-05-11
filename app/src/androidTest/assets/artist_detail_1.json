@@ -1,0 +1,7 @@
+{
+  "id": 1,
+  "name": "Artista Prueba 1",
+  "image": "https://example.com/artist1.jpg",
+  "description": "Descripcion del artista 1",
+  "birthDate": "1985-05-10"
+}
