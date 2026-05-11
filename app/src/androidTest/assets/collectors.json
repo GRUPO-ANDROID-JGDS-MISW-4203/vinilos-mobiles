@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Coleccionista Prueba 1",
+    "telephone": "3001234567",
+    "email": "coleccionista1@test.com",
+    "collectorAlbums": [],
+    "favoritePerformers": []
+  },
+  {
+    "id": 2,
+    "name": "Coleccionista Prueba 2",
+    "telephone": "3007654321",
+    "email": "coleccionista2@test.com",
+    "collectorAlbums": [],
+    "favoritePerformers": []
+  }
+]
