@@ -5,7 +5,6 @@ import android.view.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tsdc.vinilos.databinding.FragmentCollectorsBinding
 import com.tsdc.vinilos.viewmodel.CollectorViewModel
@@ -29,10 +28,10 @@ class CollectorsFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = CollectorAdapter { collector ->
+        adapter = CollectorAdapter { _ ->
             // Navegar al detalle — HU06
             // findNavController().navigate(
-            //     CollectorsFragmentDirections.actionCollectorsToDetail(collector.id)
+            //     CollectorsFragmentDirections.actionCollectorsToDetail(it.id)
             // )
         }
         b.rvCollectors.layoutManager = LinearLayoutManager(requireContext())
