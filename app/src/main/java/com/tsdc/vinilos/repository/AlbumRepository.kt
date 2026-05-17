@@ -1,8 +1,10 @@
 package com.tsdc.vinilos.repository
 
 import com.tsdc.vinilos.model.Album
+import com.tsdc.vinilos.model.AlbumRequest
 import com.tsdc.vinilos.model.Performer
 import com.tsdc.vinilos.model.Track
+import com.tsdc.vinilos.model.TrackRequest
 import com.tsdc.vinilos.network.NetworkModule
 
 class AlbumRepository {
@@ -64,5 +66,13 @@ class AlbumRepository {
 
     suspend fun getAlbum(id: Int): Album {
         return NetworkModule.api.getAlbum(id)
+    }
+
+    suspend fun createAlbum(req: AlbumRequest): Album {
+        return NetworkModule.api.createAlbum(req)
+    }
+
+    suspend fun addTrack(albumId: Int, req: TrackRequest): Track {
+        return NetworkModule.api.addTrack(albumId, req)
     }
 }

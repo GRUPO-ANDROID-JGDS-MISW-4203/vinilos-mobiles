@@ -16,6 +16,7 @@ import com.tsdc.vinilos.RoleAware
 import com.tsdc.vinilos.UserRole
 import com.tsdc.vinilos.databinding.FragmentAlbumDetailBinding
 import com.tsdc.vinilos.viewmodel.AlbumViewModel
+import androidx.navigation.fragment.findNavController
 
 class AlbumDetailFragment : Fragment(), RoleAware {
 
@@ -40,7 +41,10 @@ class AlbumDetailFragment : Fragment(), RoleAware {
         b.rvTracks.adapter = trackAdapter
 
         b.btnAddTrack.setOnClickListener {
-            // HU08 - Sprint 3
+            findNavController().navigate(
+                AlbumDetailFragmentDirections
+                    .actionDetailToAddTrack(args.albumId)
+            )
         }
         b.btnRetry.setOnClickListener {
             viewModel.fetchAlbum(args.albumId)

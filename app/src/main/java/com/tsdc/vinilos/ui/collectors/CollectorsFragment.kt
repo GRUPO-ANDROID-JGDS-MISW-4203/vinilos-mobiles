@@ -30,11 +30,12 @@ class CollectorsFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = CollectorAdapter { collector ->
-            // Navegar al detalle — HU06
-            // findNavController().navigate(
-            //     CollectorsFragmentDirections.actionCollectorsToDetail(collector.id)
-            // )
+            findNavController().navigate(
+                CollectorsFragmentDirections
+                    .actionCollectorsToDetail(collector.id)
+            )
         }
+
         b.rvCollectors.layoutManager = LinearLayoutManager(requireContext())
         b.rvCollectors.adapter = adapter
     }

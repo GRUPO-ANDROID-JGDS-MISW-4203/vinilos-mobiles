@@ -2,6 +2,8 @@ package com.tsdc.vinilos.viewmodel
 
 import androidx.lifecycle.*
 import com.tsdc.vinilos.model.Album
+import com.tsdc.vinilos.model.AlbumRequest
+import com.tsdc.vinilos.model.TrackRequest
 import com.tsdc.vinilos.repository.AlbumRepository
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
@@ -22,6 +24,9 @@ class AlbumViewModel : ViewModel() {
 
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> get() = _error
+
+    private val _success = MutableLiveData<String?>()
+    val success: LiveData<String?> get() = _success
 
     fun refresh() {
         viewModelScope.launch {
@@ -49,6 +54,38 @@ class AlbumViewModel : ViewModel() {
                 _error.value = "Sin conexión a internet"
             } catch (e: Exception) {
                 _error.value = "Error: ${e.message}"
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun createAlbum(req: AlbumRequest) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            _error.value = null
+            _success.value = null
+            try {
+                repository.createAlbum(req)
+                _success.value = "Álbum creado exitosamente"
+            } catch (e: Exception) {
+                _error.value = "Error al crear álbum: ${e.message}"
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun addTrack(albumId: Int, req: TrackRequest) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            _error.value = null
+            _success.value = null
+            try {
+                repository.addTrack(albumId, req)
+                _success.value = "Track agregado exitosamente"
+            } catch (e: Exception) {
+                _error.value = "Error al agregar track: ${e.message}"
             } finally {
                 _isLoading.value = false
             }
